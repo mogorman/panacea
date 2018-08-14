@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -15,3 +16,9 @@ class Patient(models.Model):
     siblings = models.IntegerField(blank=True)
     environmentals = models.ManyToManyField(EnvironmentalExposure)
     mutations = models.ManyToManyField(GeneticMutation)
+    creator_id = models.OneToOneField(User)
+    status =  models.IntegerField(default = 1) # 1 1 = not reviewd, 2 reviewed not accepted, 3 reviewed accepted
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    level = models.IntegerField(default=0) # 0 patient, 1 viewer, 2 editor
