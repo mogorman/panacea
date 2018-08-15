@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Patient, Profile, GeneticMutation, EnvironmentalExposure
+
+admin.site.register(Patient)
+admin.site.register(Profile)
+admin.site.register(GeneticMutation)
+admin.site.register(EnvironmentalExposure)
