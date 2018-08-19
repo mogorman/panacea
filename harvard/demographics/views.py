@@ -56,7 +56,7 @@ def edit_by_id(request, patient_id):
 @login_required
 def edit_by_patient(request, patient_id):
     # a user can only edit by user id if the id matches
-    if patient_id != request.user.id:
+    if int(patient_id) != request.user.id:
         return redirect('/demo/')
     # should check to see that a patient record exists here but it is required on creation so shouldnt be a problem
     instance = Patient.objects.get(patient=patient_id)
