@@ -22,7 +22,7 @@ class PatientForm(forms.ModelForm):
         pass
     class Meta:
         model = Patient
-        fields = ('first_name', 'last_name', 'age', 'siblings', )
+        fields = ('first_name', 'last_name', 'age', 'siblings', 'environmentals', 'mutations' )
 
 class PatientFormComplete(forms.ModelForm):
     try:
