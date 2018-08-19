@@ -1,0 +1,20 @@
+<html>
+  <head><title>Demographics Index</title></head>
+  <body>
+    <div>
+      <a href="/logout">Logout</a>
+    </div>
+    <div>
+      <a href="/demo/">Back</a>
+    </div>
+    <div>
+      {% block content %}
+      <form method="post">
+	{% csrf_token %}
+    {{ form.as_p }}
+	<button type="submit">Save patient info</button>
+      </form>
+      {% endblock %}
+    </div>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+<html>
+  <head><title>Patient Demographics</title></head>
+  <body>
+    <script>
+      function updateStatus(event) {
+          console.log("i made a change", event.target.id, event.target.value);
+          const http = new XMLHttpRequest()
+           http.open("GET", window.location + '/status_update/' + event.target.id + '/' + event.target.value)
+           http.send()
+      };
+    </script>
+    <div>
+      <a href="/logout">Logout</a>
+    </div>
+    <div>
+      <a href="/demo/">Back</a>
+    </div>
+    <div>
+      <table>
+	<tr>
+	  <th>Name</th>
+	  <th>Age</th>
+	  <th>Siblings</th>
+	  <th>Exposures</th>
+	  <th>Mutations</th>
+	  <th>Status</th>
+	</tr>
+	{% for patient in patients %}
+	<tr>
+	  <td>{% if editable %} <a href="/demo/edit/{{patient.id}}"> {% endif %}
+	      {% if not patient.first_name or not patient.last_name %} Information Not Provided {% else %} {{patient.first_name}} {{patient.last_name}} {% endif %}
+	      {% if editable %} </a> {% endif %}</td>
+	  <td> {% if not patient.age %} Information Not Provided {% else %} {{patient.age}} {% endif %} </td>
+	  <td> {% if not patient.siblings %} Information Not Provided {% else %} {{patient.siblings}} {% endif %} </td>
+	  <td> {% for environmental in patient.environmentals.all %} {{environmental.label}} {% endfor %} </td>
+	  <td> {% for mutation in patient.mutations.all %} {{mutation.label}} {% endfor %} </td>
+	  <td>
+	    <select id={{patient.id}} onchange="updateStatus(event)">
+	      <option value="1" {% if patient.status == 1 %} selected {% endif %} >Not Reviewed</option>
+	      <option value="2" {% if patient.status == 2 %} selected {% endif %} >Reviewed - Accepted</option>
+	      <option value="3" {% if patient.status == 3 %} selected {% endif %} >Review - Not Accepted</option>
+	    </select>
+	  </td>
+	</tr>
+	{% endfor %}
+      </table>
+    </div>
+  </body>
+</html>

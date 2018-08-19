@@ -5,7 +5,30 @@
       <a href="/logout">Logout</a>
     </div>
     <div>
-      Hi there {{username}} {{profile.level}}
+      <div>
+	Hi there {{user.email}}
+      </div>
+
+      {% if profile.level == 0 %}
+      <div>
+	Update your demographic information <a href="/demo/edit/patient/{{user.id}}">Here</a>
+      </div>
+      {% endif %}
+
+      {% if profile.level == 1 %}
+      <div>
+	View demographic information <a href="/demo/list">Here</a>
+      </div>
+      {% endif %}
+
+      {% if profile.level == 2 %}
+      <div>
+	Add new patient <a href="/demo/add/patient">Here</a>
+      </div
+      <div>
+	View demographic information <a href="/demo/list">Here</a>
+      </div>
+      {% endif %}
     </div>
   </body>
 </html>
