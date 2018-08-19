@@ -22,6 +22,10 @@ def index(request):
 
 @login_required
 def add(request):
+    level = request.user.profile.level
+    #if users doesnt have permissions to modify status redirect them
+    if level != 2:
+        return redirect('/demo/')
     user = User.objects.get(pk=request.user.id)
     patient = Patient.objects.create(patient=None, creator=user, deleted=1)
     return redirect('/demo/edit/{}'.format(patient.id))
@@ -29,6 +33,10 @@ def add(request):
 
 @login_required
 def edit_by_id(request, patient_id):
+    level = request.user.profile.level
+    #if users doesnt have permissions to modify status redirect them
+    if level != 2:
+        return redirect('/demo/')
     # should check to see that a patient record exists here but it is required on creation so shouldnt be a problem
     instance = Patient.objects.get(pk=patient_id)
     instance.deleted = None
@@ -47,6 +55,9 @@ def edit_by_id(request, patient_id):
 
 @login_required
 def edit_by_patient(request, patient_id):
+    # a user can only edit by user id if the id matches
+    if patient_id != request.user.id:
+        return redirect('/demo/')
     # should check to see that a patient record exists here but it is required on creation so shouldnt be a problem
     instance = Patient.objects.get(patient=patient_id)
     if not instance:
@@ -88,12 +99,6 @@ def status_update(request, patient_id, status):
         patient.status = status
         patient.save()
     return HttpResponse('OK')
-
-
-@login_required
-def review(request, patient_id):
-    patient = Patient.objects.get(pk=patient_id)
-    return HttpResponse("Currently reviewing {}. {}".format(patient_id, patient.first_name))
 
 
 def signup(request):

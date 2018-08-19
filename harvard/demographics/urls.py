@@ -9,6 +9,5 @@ urlpatterns = [
     url(r'^edit/(?P<patient_id>[0-9]*)', views.edit_by_id, name='edit'),
     url(r'^list/status_update/(\d+)/(\d+)', views.status_update, name='status_update'),
     url(r'^list', views.list, name='list'),
-    url(r'^review/(?P<patient_id>[0-9]*)', views.review, name='review'),
     url(r'^signup/$', views.signup, name='signup'),
     ]
