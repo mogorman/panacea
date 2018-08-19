@@ -75,7 +75,6 @@ def edit_by_patient(request, patient_id):
 
 @login_required
 def list(request):
-    print("getting caught here")
     level = request.user.profile.level
     if level == 0:
         return redirect('/demo/')
