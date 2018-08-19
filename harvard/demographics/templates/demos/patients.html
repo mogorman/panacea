@@ -30,8 +30,8 @@
 	  <td>{% if editable %} <a href="/demo/edit/{{patient.id}}"> {% endif %}
 	      {% if not patient.first_name or not patient.last_name %} Information Not Provided {% else %} {{patient.first_name}} {{patient.last_name}} {% endif %}
 	      {% if editable %} </a> {% endif %}</td>
-	  <td> {% if patient.age is not None %} Information Not Provided {% else %} {{patient.age}} {% endif %} </td>
-	  <td> {% if patient.siblings is not None %} Information Not Provided {% else %} {{patient.siblings}} {% endif %} </td>
+	  <td> {% if patient.age == None %} Information Not Provided {% else %} {{patient.age}} {% endif %} </td>
+	  <td> {% if patient.siblings == None %} Information Not Provided {% else %} {{patient.siblings}} {% endif %} </td>
 	  <td> {% for environmental in patient.environmentals.all %} {{environmental.label}} {% endfor %} </td>
 	  <td> {% for mutation in patient.mutations.all %} {{mutation.label}} {% endfor %} </td>
 	  <td>
