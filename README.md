@@ -1,3 +1,4 @@
+```
 Instructions
 git clone https://github.com/mogorman/panacea.git
 cd panacea
@@ -6,4 +7,4 @@ source myenv/bin/activate
 pip install -r requirements.txt
 cd harvard
 ./cleanup.sh
-
+```
