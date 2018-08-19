@@ -35,11 +35,17 @@
 	  <td> {% for environmental in patient.environmentals.all %} {{environmental.label}} {% endfor %} </td>
 	  <td> {% for mutation in patient.mutations.all %} {{mutation.label}} {% endfor %} </td>
 	  <td>
+	    {% if editable %}
 	    <select id={{patient.id}} onchange="updateStatus(event)">
 	      <option value="1" {% if patient.status == 1 %} selected {% endif %} >Not Reviewed</option>
 	      <option value="2" {% if patient.status == 2 %} selected {% endif %} >Reviewed - Accepted</option>
 	      <option value="3" {% if patient.status == 3 %} selected {% endif %} >Review - Not Accepted</option>
 	    </select>
+	    {% else %}
+	    {% if patient.status == 1 %} Not Reviewed {% endif %}
+	    {% if patient.status == 2 %} Reviewed - Accepted {% endif %}
+	    {% if patient.status == 3 %} Review - Not Accepted {% endif %}
+	    {% endif %}
 	  </td>
 	</tr>
 	{% endfor %}
